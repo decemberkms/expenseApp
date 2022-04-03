@@ -22,6 +22,12 @@ class MyHomePage extends StatelessWidget {
         id: 't2', title: 'Groceries', amount: 80.63, date: DateTime.now()),
   ];
 
+  // String titleInput;
+  // String amountInput;
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +35,7 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
@@ -39,6 +45,39 @@ class MyHomePage extends StatelessWidget {
               child: Container(child: Text('CHART!')),
               elevation: 5,
             ),
+          ),
+          Card(
+            child: Container(
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                    controller: titleController,
+                    // onChanged: (String val) {
+                    //   titleInput = val;
+                    // },
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                    controller: amountController,
+                    // onChanged: (String val) {
+                    //   amountInput = val;
+                    // },
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      print("Title: ${titleController.text}");
+                      print("Amount: ${amountController.text}");
+                    },
+                    child: Text('Add Transaction'),
+                    textColor: Colors.purple,
+                  )
+                ],
+                crossAxisAlignment: CrossAxisAlignment.end,
+              ),
+              padding: EdgeInsets.all(10),
+            ),
+            elevation: 5,
           ),
           Column(
             children: transactions.map((tx) {
