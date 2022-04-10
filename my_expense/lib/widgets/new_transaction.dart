@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 
-import './user_transactions.dart';
+// import './user_transactions.dart';
 
-class NewTrasaction extends StatelessWidget {
-  // const NewTrasaction({Key key}) : super(key: key);
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
+class NewTrasaction extends StatefulWidget {
   final Function addTx;
 
   NewTrasaction({Function this.addTx});
+
+  @override
+  State<NewTrasaction> createState() => _NewTrasactionState();
+}
+
+class _NewTrasactionState extends State<NewTrasaction> {
+  // const NewTrasaction({Key key}) : super(key: key);
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   void submitData() {
     final enteredTitle = titleController.text;
@@ -17,7 +23,9 @@ class NewTrasaction extends StatelessWidget {
     if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
-    addTx(enteredTitle, enteredAmount);
+    widget.addTx(enteredTitle, enteredAmount);
+
+    Navigator.of(context).pop();
   }
 
   @override
